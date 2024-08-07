@@ -19,7 +19,7 @@ const RssLinks = ({ sourceId, quality, excludeShorts, videoServer, hostname }: R
     `${hostname}/${sourceId}/feed${getFeedUrlParams(quality, excludeShorts, videoServer)}`;
 
   const copyRssLink = () => {
-    void navigator.clipboard.writeText(`http://${getRssLink()}`).then(() => {
+    void navigator.clipboard.writeText(`https://${getRssLink()}`).then(() => {
       setCopiedText('Copied link to RSS feed 🎉');
       setTimeout(() => setCopiedText(''), 2000);
     });

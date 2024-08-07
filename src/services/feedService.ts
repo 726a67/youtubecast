@@ -31,10 +31,10 @@ const getRssFeed = async (
     title: source.displayName,
     description: source.description,
     author: source.displayName,
-    feedUrl: `http://${host}/${sourceId}/feed${feedUrlParams}`,
+    feedUrl: `https://${host}/${sourceId}/feed${feedUrlParams}`,
     siteUrl: source.url,
     imageUrl: source.profileImageUrl.startsWith('/')
-      ? `http://${host}${source.profileImageUrl}`
+      ? `https://${host}${source.profileImageUrl}`
       : source.profileImageUrl,
   });
 
@@ -45,7 +45,7 @@ const getRssFeed = async (
       description: video.description + '\n' + '\n' + video.url,
       date: new Date(video.date),
       enclosure: {
-        url: `http://${host}/videos/${video.id}${videoQueryParams.size > 0 ? '?' : ''}${videoQueryParams.toString()}`,
+        url: `https://${host}/videos/${video.id}${videoQueryParams.size > 0 ? '?' : ''}${videoQueryParams.toString()}`,
         type: quality === Quality.Audio ? 'audio/aac' : 'video/mp4',
       },
       url: video.url,
@@ -62,7 +62,7 @@ const notifyVideoServer = async (videoServer: string, videoList: Video[]) => {
   );
 
   await Promise.race([
-    await fetch(`http://${videoServer}`, {
+    await fetch(`https://${videoServer}`, {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify(videoList.map((x) => x.id)),
